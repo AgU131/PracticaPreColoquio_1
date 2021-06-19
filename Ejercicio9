@@ -1,0 +1,35 @@
+invertir :: [Num] -> [Num]
+invertir [] = []                        -(1)
+invertir (x:xs)= (-x) : (invertir xs)   -(2)
+
+sum :: [Num] -> Num
+sum [] = 0                               -(3)
+sum (x:xs) = x + sum xs                  -(4)
+
+Demostrar: sum.(invertir.xs) = -(sum.xs)  -(HI)
+
+*{probamos que vale para el caso base de una lista vacia []}
+  sum (__invertir []__) = -(sum [])
+={(1)}
+  __sum []__ = -(__sum []__)
+={por (3) dos veces}
+  0 = -0
+={Por reflexividad del =, ya que 0=(-0)}
+  True
+  
+*{probamos que vale para el caso de una lista no vacia (x:xs)}
+  sum (invertir (x:xs)) = -(__sum (x:xs)__)
+={(4)}
+  sum (__invertir (x:xs)__) = -(x + sum xs)
+={(2)}
+  __sum ((-x) : (invertir xs))__ = -(x + sum xs)
+={(4), donde x:=(-x) y xs:=invertir xs}
+  (-x) + sum (invertir xs) = __-(x + sum xs)__
+={Distributibidad del (-)}
+  (-x) + __sum (invertir xs)__ = (-x) + (-(sum xs))
+={(HI)}
+  (-x) __+ (-(sum xs))__ = (-x) __+ (-(sum xs))__
+={Por regla de los signos dos veces}
+  (-x) -(sum xs) = (-x) -(sum xs)               -- penultimo y anteultimo innecesarios
+={Reflexividad del =}
+  True
