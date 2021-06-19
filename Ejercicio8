@@ -1,0 +1,34 @@
+quitarCeros :: [Num] -> [Num]
+quitarCeros [] = []               -(1)
+quitarCeros (x:xs)= 
+  | (x/=0) = x : quitarCeros xs   -(2)
+  | (x==0) = quitarCeros xs       -(3)
+
+sum :: [Num] -> Num
+sum [] = 0                        -(4)
+sum (x:xs) = x + sum xs           -(5)
+
+Demostrar: sum.(quitarCeros.xs) = sum.xs  -(HI)
+*{probamos que vale para el primer caso de quitarCeros donde (x/=0)}
+  sum (quitarCeros (x:xs)) = __sum (x:xs)__
+={(5)}
+  sum (__quitarCeros (x:xs)__) = x + sum xs
+={(2)}
+  sum (x : quitarCeros xs) = x + sum xs
+={(5), donde x:=x y xs:=quitarCeros xs}
+  x + __sum (quitarCeros xs)__ = x + sum xs
+={(HI)}
+  x + sum xs = x + sum xs
+={Reflexividad del =}
+  True
+
+*{probamos que vale para el segundo caso de quitarCeros donde (x==0)}
+  sum (quitarCeros (x:xs)) = __sum (x:xs)__
+={(5, siendo x:==}
+  sum (__quitarCeros (x:xs)__) = __0 + sum xs__
+={(3)por izq, y por elemento nulo de la suma por la der}
+  __sum (quitarCeros xs)__ = sum xs
+={(HI)}
+  sum xs = sum xs
+={Reflexividad del =}
+  True
