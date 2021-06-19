@@ -1,1 +1,32 @@
-stutter [] = []
+stutter [] = []                       -(1)
+stutter (x:xs) = x: (x: stutter xs)   -(2)
+
+#[] = 0                               -(3)
+#(x:xs) = 1 + #xs                     -(4)
+
+Demostrar: #.(stutter xs) = 2 * #xs    -(HI)
+Caso base:
+  #(__stutter []__) = 2 * #([]) 
+={(1)}
+  __#([])__ = 2 * __#([])__
+={(3)}
+  0 = __2 * 0__
+={Aritmetica}
+  0 = 0
+={Reflex del =}
+  True
+
+Caso Inductivo:
+  #(__stutter (x:xs)__) = 2 * #(x:xs) 
+={(2)}
+  __#(x: (x: stutter xs))__ = 2 * __#(x:xs)__
+={por (4), dos veces,donde a la izq x:=x y xs:=(x: stutter xs)}
+  1 + __#(x: stutter xs)__ = 2 * (1 + #xs)
+={por (4) donde x:=x y xs:=stutter xs}
+  __1 + 1__ + #(stutter xs) = __2 * (1 + #xs)__
+={Aritmetica a la izq y Distributiba del * a la der}
+  2 + #(stutter xs) = 2 + __2 * #xs__
+={HI}
+  2 + #(stutter xs) = 2 + #(stutter xs)
+={Reflex del =}
+  True
