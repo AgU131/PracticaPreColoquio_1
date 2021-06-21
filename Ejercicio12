@@ -1,8 +1,50 @@
 cuantos0y1 :: [Num] -> Num                      swap0y1 :: [Num] -> [Num]
 cuantos0y1 [] = 0                     -(1)      swap0y1 [] = []                       -(5)
 cuantos0y1 (x:xs)                               swap0y1 (x:xs) 
-  | x == 0 = 1 + cuantos0y1 xs        -(2)        | x == 0 = 1: swap0y1 xs            -(6)
-  | x == 1 = 1 + cuantos0y1 xs        -(3)        | x == 1 = 0: swap0y1 xs            -(7)
-  | (x/=0) && (x/=1) = cuantos0y1 xs  -(4)        | (x/=0) && (x/=1) = x: swap0y1 xs  -(8)
+  | x==0 = 1 + cuantos0y1 xs        -(2)        | x==0 = 1: swap0y1 xs            -(6)
+  | x==1 = 1 + cuantos0y1 xs        -(3)        | x==1 = 0: swap0y1 xs            -(7)
+  | (x/=0) && (x/=1) = cuantos0y1 xs  -(4)      | (x/=0) && (x/=1) = x: swap0y1 xs  -(8)
   
-Demostrar: cuantos0y1 xs = cuantos0y1 (swap0y1 xs)
+Demostrar: cuantos0y1 xs = cuantos0y1 (swap0y1 xs)    -(HI)
+
+Caso Base: 
+  cuantos0y1 [] = cuantos0y1 (__swap0y1 []__)
+={Por (5)}
+  cuantos0y1 [] = cuantos0y1 []
+={Por reflex del =}
+  True
+
+Caso Inductivo para (x==0):
+  __cuantos0y1 (x:xs)__ = cuantos0y1 (__swap0y1 (x:xs)__)
+={Por (2) a la izq, por (6) a la der}
+  1 + cuantos0y1 xs = __cuantos0y1 (1: swap0y1 xs)__
+={por (3) siendo x:=1 y xs:=(swap0y1 xs)}
+   1 + cuantos0y1 xs = 1 + __cuantos0y1 (swap0y1 xs)__
+={Por (HI)}
+   1 + cuantos0y1 xs = 1 + cuantos0y1 xs
+={Por reflex del =}
+  True
+
+Caso Inductivo para (x==1):
+  __cuantos0y1 (x:xs)__ = cuantos0y1 (__swap0y1 (x:xs)__)
+={Por (3) a la izq, por (7) a la der}
+  1 + cuantos0y1 xs = cuantos0y1 (0: swap0y1 xs)
+={por (2) siendo x:=0 y xs:=(swap0y1 xs)}
+   1 + cuantos0y1 xs = 1 + __cuantos0y1 (swap0y1 xs)__
+={Por (HI)}
+   1 + cuantos0y1 xs = 1 + cuantos0y1 xs
+={Por reflex del =}
+  True
+
+Caso Inductivo para (x/=0)&&(x/=1):
+  cuantos0y1 (x:xs) = cuantos0y1 (swap0y1 (x:xs))
+={}
+
+={}
+
+={}
+
+={}
+
+={Por reflex del =}
+  True
