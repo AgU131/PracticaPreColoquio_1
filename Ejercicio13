@@ -1,2 +1,62 @@
-cuantos :: Num -> [Num] -> Num
-cuantos 
+cuantos n :: Num -> [Num] -> Num
+cuantos n [] = 0                  -(1)             cuantos 0 [] = 0              -(1)     cuantos 1 [] = 0              -(1)
+cuantos n (x:xs)                                   cuantos 0 (x:xs)                       cuantos 1 (x:xs)
+  | x==n = 1 + cuantos n xs       -(2)               | x==0 = 1 + cuantos n xs   -(2)       | x==1 = 1 + cuantos n xs   -(2)
+  | x/=n = cuantos n xs           -(3)               | x/=0 = cuantos n xs       -(3)       | x/=1 = cuantos n xs       -(3)
+
+agregaSiguiente :: [Num] -> [Num]
+agregaSiguiente [] = []           -(4)
+agregaSiguiente (x:xs) = x: ((x+1): agregaSiguiente xs)  -(5)
+
+Demostrar: cuantos 1 (agregaSiguiente xs) = cuantos 0 xs + cuantos 1 xs   -(HI)
+
+Caso Base: 
+  cuantos 1 (__agregaSiguiente []__) = __cuantos 0 []__ + __cuantos 1 []__
+={Por (4) a la izq, y por (1) dos veces a la der}
+  __cuantos 1 []__ = 0 + 0
+={(1)}
+  0 = __0 + 0__
+={Aritmetica}
+  0 = 0
+={Reflex del =}
+  True
+
+Caso Inductivo para x==0:
+  cuantos 1 (__agregaSiguiente (x:xs)__) = __cuantos 0 (x:xs)__ + __cuantos 1 (x:xs)__
+={Por (5), por (2) y por (3)}
+  __cuantos 1 (x: ((x+1): agregaSiguiente xs))__ = 1 + cuantos 0 xs + cuantos 1 xs
+={Por (3) siendo x:=x y xs:=((x+1): agregaSiguiente xs)}
+  __cuantos 1 ((x+1): agregaSiguiente xs)__ = 1 + cuantos 0 xs + cuantos 1 xs
+={Por (2) siendo x:=(x+1) y xs:=(agregaSiguiente xs), siendo x==0 entonces (x+1)= 1/=0}
+  1 + cuantos 1 (agregaSiguiente xs) = 1 + __cuantos 0 xs + cuantos 1 xs__
+={(HI)}
+  1 + cuantos 1 (agregaSiguiente xs) = 1 + cuantos 1 (agregaSiguiente xs)
+={Reflex del =}
+  True
+
+Caso Inductivo para x==1: 
+cuantos 1 (__agregaSiguiente (x:xs)__) = __cuantos 0 (x:xs)__ + __cuantos 1 (x:xs)__
+={Por (5), por (3) y por (2)}
+  __cuantos 1 (x: ((x+1): agregaSiguiente xs))__ = __cuantos 0 xs + 1 + cuantos 1 xs__
+={Por (2) siendo x:=x y xs:=((x+1): agregaSiguiente xs), y conmutatividad de la suma}
+  __1 + cuantos 1 ((x+1): agregaSiguiente xs)__ = 1 + cuantos 0 xs + cuantos 1 xs
+={Por (3) siendo x:=(x+1) y xs:=(agregaSiguiente xs), siendo x==1 entonces (x+1)= 2/=1}
+  1 + cuantos 1 (agregaSiguiente xs) = 1 + __cuantos 0 xs + cuantos 1 xs__
+={(HI)}
+  1 + cuantos 1 (agregaSiguiente xs) = 1 + cuantos 1 (agregaSiguiente xs)
+={Reflex del =}
+  True
+
+Caso Inductivo para x/=0 && x/=1: 
+cuantos 1 (__agregaSiguiente (x:xs)__) = __cuantos 0 (x:xs)__ + __cuantos 1 (x:xs)__
+={Por (5), por (3) y por (3)}
+  __cuantos 1 (x: ((x+1): agregaSiguiente xs))__ = cuantos 0 xs + cuantos 1 xs
+={Por (3) siendo x:=x y xs:=((x+1): agregaSiguiente xs)}
+  __cuantos 1 ((x+1): agregaSiguiente xs)__ = cuantos 0 xs + cuantos 1 xs
+={Por (3) siendo x:=(x+1) y xs:=(agregaSiguiente xs), siendo x/=0 && x/=1}
+  cuantos 1 (agregaSiguiente xs) = __cuantos 0 xs + cuantos 1 xs__
+={(HI)}
+  cuantos 1 (agregaSiguiente xs) = cuantos 1 (agregaSiguiente xs)
+={Reflex del =}
+  True
+
