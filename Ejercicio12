@@ -1,3 +1,8 @@
-cuantos0y1 :: [Num] -> Num
-
-swap0y1 :: [Num] -> [Num]
+cuantos0y1 :: [Num] -> Num                      swap0y1 :: [Num] -> [Num]
+cuantos0y1 [] = 0                     -(1)      swap0y1 [] = []                       -(5)
+cuantos0y1 (x:xs)                               swap0y1 (x:xs) 
+  | x == 0 = 1 + cuantos0y1 xs        -(2)        | x == 0 = 1: swap0y1 xs            -(6)
+  | x == 1 = 1 + cuantos0y1 xs        -(3)        | x == 1 = 0: swap0y1 xs            -(7)
+  | (x/=0) && (x/=1) = cuantos0y1 xs  -(4)        | (x/=0) && (x/=1) = x: swap0y1 xs  -(8)
+  
+Demostrar: cuantos0y1 xs = cuantos0y1 (swap0y1 xs)
