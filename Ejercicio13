@@ -1,0 +1,2 @@
+cuantos :: Num -> [Num] -> Num
+cuantos 
