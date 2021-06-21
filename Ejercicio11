@@ -4,4 +4,46 @@ soloPares (x:xs)
   | x mod 2 == 0 = x : soloPares xs     -(2)
   | x mod 2 /= 0 = soloPares xs         -(3)
 
+Definimos la funcion concatenar:= (++)
+
+
 Demostrar: soloPares (xs ++ ys) = soloPares xs ++ soloPares ys   -(HI)
+
+Caso Base: 
+  soloPares (__[] ++ []__) = __soloPares []__ ++ __soloPares []__
+={Por def del (++) a la izq, y por (1) dos veces a la der}
+  __soloPares []__ = __[] ++ []__
+={Por (1) a la izq, y por def de (++) a la der}
+  [] = []
+={Por reflex del =}
+  True
+
+Caso Inductivo para el primer caso de soloPares, cuando (x mod 2 == 0): 
+  soloPares ((x:xs) ++ (y:ys)) = soloPares (x:xs) ++ soloPares (y:ys)
+={}
+  
+={}
+  
+={}
+  
+={}
+  
+={}
+  
+={Por reflex del =}
+  True
+  
+Caso Inductivo para el segundo caso de soloPares, cuando (x mod 2 /= 0): 
+  soloPares ((x:xs) ++ (y:ys)) = soloPares (x:xs) ++ soloPares (y:ys)
+={}
+  
+={}
+  
+={}
+  
+={}
+  
+={}
+  
+={Por reflex del =}
+  True
