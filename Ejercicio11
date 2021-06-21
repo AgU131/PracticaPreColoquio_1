@@ -1,0 +1,7 @@
+soloPares :: [Num] -> [Num]
+soloPares [] = []
+soloPares (x:xs) 
+  | x mod 2 == 0 = x : soloPares xs
+  | x mod 2 /= 0 = soloPares xs
+
+Demostrar: soloPares ()soloPares xs ++ soloPares ys
