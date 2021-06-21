@@ -36,7 +36,7 @@ Caso Inductivo para (x==1):
 ={Por reflex del =}
   True
 
-Caso Inductivo para (x/=0)&&(x/=1): cuantos0y1 xs  -(4)      | (x/=0) && (x/=1) = x: swap0y1 xs -(8)
+Caso Inductivo para (x/=0)&&(x/=1):
   __cuantos0y1 (x:xs)__ = cuantos0y1 (__swap0y1 (x:xs)__)
 ={Por (4) a la izq, por (8) a la der}
   cuantos0y1 xs = __cuantos0y1 (x: swap0y1 xs)__
