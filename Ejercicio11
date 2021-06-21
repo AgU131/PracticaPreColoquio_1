@@ -1,7 +1,7 @@
 soloPares :: [Num] -> [Num]
-soloPares [] = []
+soloPares [] = []                       -(1)
 soloPares (x:xs) 
-  | x mod 2 == 0 = x : soloPares xs
-  | x mod 2 /= 0 = soloPares xs
+  | x mod 2 == 0 = x : soloPares xs     -(2)
+  | x mod 2 /= 0 = soloPares xs         -(3)
 
-Demostrar: soloPares ()soloPares xs ++ soloPares ys
+Demostrar: soloPares (xs ++ ys) = soloPares xs ++ soloPares ys   -(HI)
