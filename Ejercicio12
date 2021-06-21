@@ -1,0 +1,3 @@
+cuantos0y1 :: [Num] -> Num
+
+swap0y1 :: [Num] -> [Num]
