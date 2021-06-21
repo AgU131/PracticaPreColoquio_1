@@ -3,6 +3,10 @@ soloPares [] = []                       -(1)
 soloPares (x:xs) 
   | x mod 2 == 0 = x : soloPares xs     -(2)
   | x mod 2 /= 0 = soloPares xs         -(3)
+  
+++ :: [a] -> [a] -> [a]			
+[ ] ++ ys  =  ys 			                  -(4)
+(x:xs) ++ ys  =  x: (xs ++ ys)	        -(5)
 
 Definimos la funcion concatenar:= (++)
 
@@ -19,9 +23,9 @@ Caso Base:
   True
 
 Caso Inductivo para el primer caso de soloPares, cuando (x mod 2 == 0): 
-  soloPares ((x:xs) ++ (y:ys)) = soloPares (x:xs) ++ soloPares (y:ys)
-={}
-  
+  soloPares ((x:xs) ++ (y:ys)) = __soloPares (x:xs)__ ++ __soloPares (y:ys)__
+={Por (2) dos veces}
+  soloPares ((x:xs) ++ (y:ys)) = x : soloPares xs ++ y : soloPares ys
 ={}
   
 ={}
@@ -34,11 +38,11 @@ Caso Inductivo para el primer caso de soloPares, cuando (x mod 2 == 0):
   True
   
 Caso Inductivo para el segundo caso de soloPares, cuando (x mod 2 /= 0): 
-  soloPares ((x:xs) ++ (y:ys)) = soloPares (x:xs) ++ soloPares (y:ys)
-={}
-  
-={}
-  
+  soloPares ((x:xs) ++ (y:ys)) = __soloPares (x:xs)__ ++ __soloPares (y:ys)__
+={Por (2) dos veces}
+  soloPares ((x:xs) ++ (y:ys)) = __soloPares xs ++ soloPares ys__
+={(HI)}
+  soloPares ((x:xs) ++ (y:ys)) = soloPares (xs ++ ys)
 ={}
   
 ={}
