@@ -23,31 +23,19 @@ Caso Base:
   True
 
 Caso Inductivo para el primer caso de soloPares, cuando (x mod 2 == 0): 
-  soloPares ((x:xs) ++ (y:ys)) = __soloPares (x:xs)__ ++ __soloPares (y:ys)__
-={Por (2) dos veces}
-  soloPares ((x:xs) ++ (y:ys)) = x : soloPares xs ++ y : soloPares ys
-={}
-  
-={}
-  
-={}
-  
-={}
-  
+  soloPares (__(x:xs) ++ ys__) = __soloPares (x:xs)__ ++ soloPares ys
+={Por (5) a la izq, y (2) a la der}
+  __soloPares (x : (xs ++ ys))__ = x : __soloPares xs ++ soloPares ys__
+={Por (2) donde x:=x y xs:=(xs ++ ys), por (HI) a la der}
+  x: soloPares (xs ++ ys) = x: soloPares (xs ++ ys)
 ={Por reflex del =}
   True
   
 Caso Inductivo para el segundo caso de soloPares, cuando (x mod 2 /= 0): 
-  soloPares ((x:xs) ++ (y:ys)) = __soloPares (x:xs)__ ++ __soloPares (y:ys)__
-={Por (2) dos veces}
-  soloPares ((x:xs) ++ (y:ys)) = __soloPares xs ++ soloPares ys__
-={(HI)}
-  soloPares ((x:xs) ++ (y:ys)) = soloPares (xs ++ ys)
-={}
-  
-={}
-  
-={}
-  
+  soloPares (__(x:xs) ++ ys__) = __soloPares (x:xs)__ ++ soloPares ys
+={Por (5) a la izq, y (3) a la der}
+  soloPares (x: (xs ++ ys)) = __soloPares xs ++ soloPares ys__
+={Por (3) donde x:=x y xs:=(xs ++ ys), por (HI) a la der}
+  soloPares (xs ++ ys) = soloPares (xs ++ ys)  
 ={Por reflex del =}
   True
