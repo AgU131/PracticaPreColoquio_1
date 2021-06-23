@@ -1,0 +1,37 @@
+hayCoT :: [Figura] -> Bool                                    ∈ ¬ ≡ ∀ ∃ ≠ ^ < > ∧ ∨ ≥ ≤
+soloCeros.[] = False                                   -(1)
+soloCeros.(x:xs) = (x = 0) ∧ soloCeros.xs              -(2)
+
+∈l :: A -> [A] -> Bool
+n ∈l [] = False                                        -(3)
+n ∈l.(x:xs) = (n = x) ∨ (n ∈l xs)                      -(4)
+
+Demostrar: soloCeros.xs = < ∀x : x ∈l xs : x = 0>
+
+Caso Base: 
+  __soloCeros.[]__ = < ∀x : x ∈l [] : x = 0>
+={(1)}
+  True = < ∀x : __x ∈l []__ : x = 0>
+={(3)}
+  True = < ∀x : False : x = 0>
+={Por rango vacio del ∀}
+  True = True
+={Reflex del =}
+  True
+
+Hipotesis : soloCeros.xs = < ∀y : y ∈l xs : y = 0>     -(HI)
+
+Caso Inductivo: 
+  __soloCeros.(x:xs)__ = < ∀y : y ∈l (x:xs) : y = 0> 
+={(2)}
+  (x = 0) ∧ soloCeros.xs = < ∀y : __y ∈l (x:xs)__ : y = 0>
+={(4)}
+  (x = 0) ∧ soloCeros.xs = __< ∀y : (y = x) ∨ (y ∈l xs) : y = 0>__
+={Particion del rango del ∀}
+  (x = 0) ∧ soloCeros.xs = < ∀y : (y = x) : y = 0> ∧ __< ∀y : y ∈l xs : y = 0>__
+={(HI)}
+  (x = 0) ∧ soloCeros.xs = __< ∀y : (y = x) : y = 0>__ ∧ soloCeros.xs
+={Rango unitario del ∀}
+  (x = 0) ∧ soloCeros.xs = (x = 0) ∧ soloCeros.xs
+={Reflex del =}
+  True
