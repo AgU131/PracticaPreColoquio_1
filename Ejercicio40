@@ -1,12 +1,12 @@
 hayCoT :: [Figura] -> Bool                                    ∈ ¬ ≡ ∀ ∃ ≠ ^ < > ∧ ∨ ≥ ≤
-soloCeros.[] = False                                   -(1)
-soloCeros.(x:xs) = (x = 0) ∧ soloCeros.xs              -(2)
+hayCoTs.[] = False                                           -(1)
+hayCoT.(x:xs) = (circulo.x ∨ triangulo.x) ∨ hayCoT.xs        -(2)
 
 ∈l :: A -> [A] -> Bool
-n ∈l [] = False                                        -(3)
-n ∈l.(x:xs) = (n = x) ∨ (n ∈l xs)                      -(4)
+n ∈l [] = False                                              -(3)
+n ∈l.(x:xs) = (n = x) ∨ (n ∈l xs)                            -(4)
 
-Demostrar: soloCeros.xs = < ∀x : x ∈l xs : x = 0>
+Demostrar: hayCoT.xs = <∃y : y ∈l xs : triangulo.y ∧ rojo.y> -(HI)
 
 Caso Base: 
   __soloCeros.[]__ = < ∀x : x ∈l [] : x = 0>
