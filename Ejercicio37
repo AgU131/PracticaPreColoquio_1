@@ -1,19 +1,34 @@
 algunCuadrado :: [Figura] -> Bool                                 ∈ ¬ ≡ ∀ ∃ ≠ ^ < > ∧ ∨ ≥ ≤
 algunCuadrado [] = False                                    -(1)
-algunCuadrado (x:xs) = cuadrado x || algunCuadrado xs       -(2)
+algunCuadrado (x:xs) = cuadrado x ∧ algunCuadrado xs       -(2)
 
-∈l n [] = Fasle                                             -(3)
-∈l n (x:xs) = (n==x) || (∈l n xs)                           -(4)
+n ∈l [] = Fasle                                             -(3)
+n ∈l (x:xs) = (n==x) ∧ (n ∈l xs)                            -(4)
 
-Demostrar: algunCuadrado xs = < ∃x : x ∈l xs : cuadrado x>  -(5)
+Demostrar: algunCuadrado xs = < ∃y : y ∈l xs : cuadrado y>  -(HI)
 
 Caso Base: 
-  __algunCuadrado []__ = < ∃x : x ∈l [] : cuadrado x>
+  __algunCuadrado []__ = < ∃y : y ∈l [] : cuadrado y>
 ={(1)}
-  False = < ∃x : __x ∈l []__ : cuadrado x>
+  False = < ∃y : __y ∈l []__ : cuadrado y>
 ={(3)}
+  False = __< ∃y : Fasle : cuadrado y>__
+={Por rango vacio del existe}
+  False = False
+={Reflex del =}
+  True
 
-={}
-
-={Reflex del }
-
+Caso Inductivo: 
+  __algunCuadrado (x:xs)__ = < ∃y : y ∈l xs : cuadrado y> 
+={(2)}
+  cuadrado x ∧ algunCuadrado xs = < ∃y : __y ∈l xs__ : cuadrado y> 
+={(4)}
+  cuadrado x ∧ algunCuadrado xs = __< ∃y : (y==x) ∧ (y ∈l xs) : cuadrado y>__
+={Particion del rando del existe}
+  cuadrado x ∧ algunCuadrado xs = < ∃y : (y==x) : cuadrado y> ∧ __< ∃y : (∈l y xs) : cuadrado y>__
+={(HI)}
+  cuadrado x ∧ algunCuadrado xs = __< ∃y : (y==x) : cuadrado y>__ ∧ algunCuadrado xs
+={Rango uniostario del existe}
+  cuadrado x ∧ algunCuadrado xs = cuadrado x ∧ < ∃y : (∈l y xs) : cuadrado y>
+={Reflex del =}
+  True
