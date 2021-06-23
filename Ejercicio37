@@ -1,0 +1,19 @@
+algunCuadrado :: [Figura] -> Bool                                 ∈ ¬ ≡ ∀ ∃ ≠ ^ < > ∧ ∨ ≥ ≤
+algunCuadrado [] = False                                    -(1)
+algunCuadrado (x:xs) = cuadrado x || algunCuadrado xs       -(2)
+
+∈l n [] = Fasle                                             -(3)
+∈l n (x:xs) = (n==x) || (∈l n xs)                           -(4)
+
+Demostrar: algunCuadrado xs = < ∃x : x ∈l xs : cuadrado x>  -(5)
+
+Caso Base: 
+  __algunCuadrado []__ = < ∃x : x ∈l [] : cuadrado x>
+={(1)}
+  False = < ∃x : __x ∈l []__ : cuadrado x>
+={(3)}
+
+={}
+
+={Reflex del }
+
