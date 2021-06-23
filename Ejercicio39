@@ -1,0 +1,35 @@
+hayTR :: [Figura] -> Bool                                    ∈ ¬ ≡ ∀ ∃ ≠ ^ < > ∧ ∨ ≥ ≤
+hayTR.[] = False                                    -(1)
+hayTR.(x:xs) = (triangulo.x ∧ rojo.x) ∨ hayTR.xs    -(2)
+
+∈l :: A -> [A] -> Bool
+n ∈l [] = False                                     -(3)
+n ∈l.(x:xs) = (n = x) ∨ (n ∈l xs)                   -(4)
+
+Demostrar: hayTR.xs = <∃y : y ∈l xs : triangulo.y ∧ rojo.y>  -(HI)
+
+Caso Base: 
+  __hayTR.xs__ = <∃y : y ∈l xs : triangulo.y ∧ rojo.y>
+={(1)}
+  False = <∃y : __y ∈l xs__ : triangulo.y ∧ rojo.y>
+={(3)}
+  False = __<∃y : False : triangulo.y ∧ rojo.y>__
+={Por rango vacio del ∃}
+  False = False
+={Reflex del =}
+  True
+
+Caso Inductivo: 
+  __hayTR.(x:xs)__ = <∃y : y ∈l (x:xs) : triangulo.y ∧ rojo.y>
+={(2)}
+  (triangulo.x ∧ rojo.x) ∨ hayTR.xs = <∃y : __y ∈l (x:xs)__ : triangulo.y ∧ rojo.y>
+={(4)}
+  (triangulo.x ∧ rojo.x) ∨ hayTR.xs = __<∃y : (y = x) ∨ (y ∈l xs) : triangulo.y ∧ rojo.y>__
+={Particion del rango del ∃}
+  (triangulo.x ∧ rojo.x) ∨ hayTR.xs = <∃y : (y = x) : triangulo.y ∧ rojo.y> ∨ __<∃y : (y ∈l xs) : triangulo.y ∧ rojo.y>__
+={(HI)}
+  (triangulo.x ∧ rojo.x) ∨ hayTR.xs = __<∃y : (y = x) : triangulo.y ∧ rojo.y>__ ∨ hayTR.xs
+={Rango unitario del ∃}
+  (triangulo.x ∧ rojo.x) ∨ hayTR.xs = (triangulo.x ∧ rojo.x) ∨ hayTR.xs
+={Reflex del =}
+  True
